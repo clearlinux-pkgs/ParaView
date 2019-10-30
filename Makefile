@@ -1,0 +1,5 @@
+PKG_NAME := ParaView
+URL = https://github.com/Kitware/ParaView/archive/v5.7.0/ParaView-5.7.0.tar.gz
+ARCHIVES = http://www.paraview.org/files/v5.7/ParaViewData-v5.7.0.tar.gz DataPackage https://gitlab.kitware.com/vtk/vtk/-/archive/e4e8a4df9cc67fd2bb3dbb3b1c50a25177cbfe68/vtk-e4e8a4df9cc67fd2bb3dbb3b1c50a25177cbfe68.tar.bz2 VTK https://gitlab.kitware.com/vtk/vtk-m/-/archive/ae6999e534876ffa1b723511d60c2d8585a38f03/vtk-m-ae6999e534876ffa1b723511d60c2d8585a38f03.tar.bz2 VTK/ThirdParty/vtkm/vtkvtkm/vtk-m https://gitlab.kitware.com/paraview/visitbridge/-/archive/4e5fd802e83fcc8601b7a75d318ac277514cb736/visitbridge-4e5fd802e83fcc8601b7a75d318ac277514cb736.tar.bz2 Utilities https://gitlab.kitware.com/paraview/qttesting/-/archive/a17c15627db0852242d83460e032a021571669df/qttesting-a17c15627db0852242d83460e032a021571669df.tar.bz2 ThirdParty/QtTesting https://gitlab.kitware.com/paraview/icet/-/archive/61e37d02157e0bbc337e4e628813ab5c929a1eb1/icet-61e37d02157e0bbc337e4e628813ab5c929a1eb1.tar.bz2 ThirdParty/IceT
+
+include ../common/Makefile.common

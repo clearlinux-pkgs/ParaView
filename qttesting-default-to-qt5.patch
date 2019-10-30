@@ -1,0 +1,27 @@
+--- a/ThirdParty/QtTesting/CMakeLists.txt-org	2019-10-31 11:02:39.000000000 -0700
++++ b/ThirdParty/QtTesting/CMakeLists.txt	2019-10-31 11:03:39.915375826 -0700
+@@ -5,7 +5,7 @@
+ PROJECT(QtTesting)
+ 
+ IF(NOT DEFINED QtTesting_QT_VERSION)
+-  SET(QtTesting_QT_VERSION "4" CACHE STRING "Expected Qt version")
++  SET(QtTesting_QT_VERSION "5" CACHE STRING "Expected Qt version")
+   MARK_AS_ADVANCED(QtTesting_QT_VERSION)
+   SET_PROPERTY(CACHE QtTesting_QT_VERSION PROPERTY STRINGS 4 5)
+ ENDIF()
+@@ -248,13 +248,13 @@
+ CONFIGURE_FILE(${QtTesting_SOURCE_DIR}/QtTestingConfigure.h.in
+                ${QtTesting_BINARY_DIR}/QtTestingConfigure.h)
+ 
+-if (FALSE)
++#if (FALSE)
+ INSTALL(TARGETS qttesting
+   EXPORT ${QT_TESTING_INSTALL_EXPORT_NAME}
+   RUNTIME DESTINATION ${QtTesting_INSTALL_BIN_DIR} COMPONENT Runtime
+   LIBRARY DESTINATION ${QtTesting_INSTALL_LIB_DIR} COMPONENT Runtime
+   ARCHIVE DESTINATION ${QtTesting_INSTALL_LIB_DIR} COMPONENT Development)
+-endif ()
++#endif ()
+ 
+ 
+ option(BUILD_EXAMPLES "Build examples" OFF)

@@ -1,0 +1,4 @@
+override.patch
+qttesting-default-to-qt5.patch
+shared-folder.patch
+

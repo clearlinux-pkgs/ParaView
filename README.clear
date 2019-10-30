@@ -1,0 +1,9 @@
+How to update:
+- Run update.py $TAG to get newest submodules
+- Run make autospec
+
+Example:
+
+$ ./update.py v5.7.0
+$ make autospec
+

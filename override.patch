@@ -1,0 +1,11 @@
+--- a/Plugins/StreamLinesRepresentation/Representations/vtkStreamLinesMapper.h-org	2019-09-26 13:59:18.000000000 -0700
++++ b/Plugins/StreamLinesRepresentation/Representations/vtkStreamLinesMapper.h	2019-10-29 16:46:42.651022660 -0700
+@@ -104,7 +104,7 @@
+    * this method returns true, an actor may treat the geometry as translucent
+    * since a constant translucency is set on the property, for example.
+    */
+-  bool GetIsOpaque() override { return true; }
++  bool GetIsOpaque() { return true; }
+ 
+   /**
+    * WARNING: INTERNAL METHOD - NOT INTENDED FOR GENERAL USE

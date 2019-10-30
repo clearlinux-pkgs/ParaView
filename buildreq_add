@@ -1,0 +1,25 @@
+# This file contains additional build requirements that did not get
+# picked up automatically. One name per line, no whitespace.
+utf8cpp-dev
+double-conversion-dev
+lz4-dev
+jsoncpp-dev
+libXt-dev
+libXtst-dev
+libXv-dev
+libXres-dev
+libXcursor-dev
+libXft-dev
+libXpm-dev
+libXmu-dev
+libXScrnSaver-dev
+libxkbfile-dev
+libXxf86misc-dev
+qttools-dev
+qtxmlpatterns-dev
+protobuf-dev
+netcdf-dev
+tcl-dev
+tk-dev
+CGNS-dev
+glew-dev
