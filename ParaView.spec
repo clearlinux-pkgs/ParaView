@@ -4,7 +4,7 @@
 #
 Name     : ParaView
 Version  : 5.7.0
-Release  : 20
+Release  : 21
 URL      : https://github.com/Kitware/ParaView/archive/v5.7.0/ParaView-5.7.0.tar.gz
 Source0  : https://github.com/Kitware/ParaView/archive/v5.7.0/ParaView-5.7.0.tar.gz
 Source1  : http://www.paraview.org/files/v5.7/ParaViewData-v5.7.0.tar.gz
@@ -85,6 +85,7 @@ BuildRequires : zlib-dev
 Patch1: override.patch
 Patch2: qttesting-default-to-qt5.patch
 Patch3: shared-folder.patch
+Patch4: 0001-Python-3.8-compat-patch.patch
 
 %description
 ParaView is an open-source, multi-platform data analysis and
@@ -209,13 +210,14 @@ cp -r %{_builddir}/icet-61e37d02157e0bbc337e4e628813ab5c929a1eb1/* %{_builddir}/
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
+%patch4 -p1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1574886919
+export SOURCE_DATE_EPOCH=1575322111
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -249,7 +251,7 @@ make  %{?_smp_mflags}  VERBOSE=1
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1574886919
+export SOURCE_DATE_EPOCH=1575322111
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/ParaView
 cp %{_builddir}/ParaView-5.7.0/Copyright.txt %{buildroot}/usr/share/package-licenses/ParaView/37a8b833dbdc6e1a55b31856ea576d32f6183a03
@@ -258,9 +260,12 @@ cp %{_builddir}/ParaView-5.7.0/Plugins/GeodesicMeasurement/Filters/FmmMesh/Copyr
 cp %{_builddir}/ParaView-5.7.0/Plugins/GmshReader/License.txt %{buildroot}/usr/share/package-licenses/ParaView/9171b73c58271d57144d45127d0ac8f1b766c50d
 cp %{_builddir}/ParaView-5.7.0/ThirdParty/CosmoHaloFinder/vtkcosmohalofinder/LICENSE %{buildroot}/usr/share/package-licenses/ParaView/705cedcbfbf2689bd852a3864517c0476a5069e5
 cp %{_builddir}/ParaView-5.7.0/ThirdParty/FreezePython/LICENSE %{buildroot}/usr/share/package-licenses/ParaView/a6cdff8a5e3b32bfdbe19e3656e0414da538da84
+cp %{_builddir}/ParaView-5.7.0/ThirdParty/NvPipe/vtknvpipe/LICENSE %{buildroot}/usr/share/package-licenses/ParaView/0209d812b850a8d6ccb4f26b97d963e03ffb2001
 cp %{_builddir}/ParaView-5.7.0/ThirdParty/cgns/vtkcgns/license.txt %{buildroot}/usr/share/package-licenses/ParaView/1be7ca6b47850de97d2dd5cab74d22620d017274
 cp %{_builddir}/ParaView-5.7.0/ThirdParty/cinema/paraview/tpl/LICENSE %{buildroot}/usr/share/package-licenses/ParaView/3d3834d24785e23ac63d088df2955c6bbffc3bad
 cp %{_builddir}/ParaView-5.7.0/ThirdParty/protobuf/vtkprotobuf/LICENSE %{buildroot}/usr/share/package-licenses/ParaView/1b5a14d06dd784e88dadc5c68344be2dc13875b6
+cp %{_builddir}/ParaView-5.7.0/Utilities/Library/VisItLib/COPYRIGHT %{buildroot}/usr/share/package-licenses/ParaView/649895f7c9565559e4186c322e9cfd7530ad803b
+cp %{_builddir}/ParaView-5.7.0/Utilities/databases/readers/COPYRIGHT %{buildroot}/usr/share/package-licenses/ParaView/649895f7c9565559e4186c322e9cfd7530ad803b
 cp %{_builddir}/ParaView-5.7.0/VTK/Copyright.txt %{buildroot}/usr/share/package-licenses/ParaView/73e1eb91dcdfcedf106ced4e67bc691614f0a3b3
 cp %{_builddir}/ParaView-5.7.0/VTK/Domains/Chemistry/COPYING %{buildroot}/usr/share/package-licenses/ParaView/4be8066dcfda61575b9302ae635f9ab15ec323ad
 cp %{_builddir}/ParaView-5.7.0/VTK/ThirdParty/diy2/vtkdiy2/LICENSE.txt %{buildroot}/usr/share/package-licenses/ParaView/d28d71e6570dd1964e2c992ed10a13ae67a2f840
@@ -6853,6 +6858,7 @@ cd ..
 
 %files license
 %defattr(0644,root,root,0755)
+/usr/share/package-licenses/ParaView/0209d812b850a8d6ccb4f26b97d963e03ffb2001
 /usr/share/package-licenses/ParaView/0ca22faedb8ee495473a82c4d91452493b22ac9f
 /usr/share/package-licenses/ParaView/0d84254ea9ee65dbfaa85ae4077484b75000e9cd
 /usr/share/package-licenses/ParaView/0e10f8b7fa2ac9187d6b30822680ee7a16ef99c6
@@ -6879,6 +6885,7 @@ cd ..
 /usr/share/package-licenses/ParaView/56832d7f589a10fd7739cfc994d922ec3369209c
 /usr/share/package-licenses/ParaView/5c1d4d8f603100ce87f5dab2182b9641c505bcd1
 /usr/share/package-licenses/ParaView/5f78f21af8c8d27e0335d335a9dc9560bcc6f024
+/usr/share/package-licenses/ParaView/649895f7c9565559e4186c322e9cfd7530ad803b
 /usr/share/package-licenses/ParaView/64b7f213ddd72695d94866a1a9532ee5b3a472a8
 /usr/share/package-licenses/ParaView/65359c69ba0a7a743bc3e01f36c04445ff1bbb3c
 /usr/share/package-licenses/ParaView/66933e63e70616b43f1dc60340491f8e050eedfd

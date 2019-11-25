@@ -1,4 +1,4 @@
 override.patch
 qttesting-default-to-qt5.patch
 shared-folder.patch
-
+0001-Python-3.8-compat-patch.patch
