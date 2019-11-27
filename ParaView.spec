@@ -4,7 +4,7 @@
 #
 Name     : ParaView
 Version  : 5.7.0
-Release  : 15
+Release  : 16
 URL      : https://github.com/Kitware/ParaView/archive/v5.7.0/ParaView-5.7.0.tar.gz
 Source0  : https://github.com/Kitware/ParaView/archive/v5.7.0/ParaView-5.7.0.tar.gz
 Source1  : http://www.paraview.org/files/v5.7/ParaViewData-v5.7.0.tar.gz
@@ -21,6 +21,7 @@ Requires: ParaView-data = %{version}-%{release}
 Requires: ParaView-lib = %{version}-%{release}
 Requires: ParaView-license = %{version}-%{release}
 Requires: ParaView-python = %{version}-%{release}
+Requires: ParaView-python3 = %{version}-%{release}
 BuildRequires : CGNS-dev
 BuildRequires : boost-dev
 BuildRequires : buildreq-cmake
@@ -162,10 +163,20 @@ license components for the ParaView package.
 %package python
 Summary: python components for the ParaView package.
 Group: Default
+Requires: ParaView-python3 = %{version}-%{release}
 Provides: paraview-python
 
 %description python
 python components for the ParaView package.
+
+
+%package python3
+Summary: python3 components for the ParaView package.
+Group: Default
+Requires: python3-core
+
+%description python3
+python3 components for the ParaView package.
 
 
 %prep
@@ -204,7 +215,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1573070601
+export SOURCE_DATE_EPOCH=1574886919
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -238,7 +249,7 @@ make  %{?_smp_mflags}  VERBOSE=1
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1573070601
+export SOURCE_DATE_EPOCH=1574886919
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/ParaView
 cp %{_builddir}/ParaView-5.7.0/Copyright.txt %{buildroot}/usr/share/package-licenses/ParaView/37a8b833dbdc6e1a55b31856ea576d32f6183a03
@@ -308,6 +319,9 @@ mkdir -p %{buildroot}/usr/lib64
 mv %{buildroot}/usr/lib/libQtTesting* %{buildroot}/usr/lib64
 mkdir -p %{buildroot}/usr/lib64/cmake/qttesting
 mv %{buildroot}/usr/lib/cmake/qttesting %{buildroot}/usr/lib64/cmake
+p3_version=$(/usr/bin/python3 -c "import sys; sys.stdout.write(sys.version[:3])")
+mkdir -p %{buildroot}/usr/lib/python$p3_version/site-packages
+mv  %{buildroot}/usr/lib64/python$p3_version/site-packages  %{buildroot}/usr/lib/python$p3_version
 mkdir -p %{buildroot}/usr/share/ParaView-5.7/data/ParaView-v5.7.0
 cd ./DataPackage
 cp -a . %{buildroot}/usr/share/ParaView-5.7/data/ParaView-v5.7.0
@@ -6893,4 +6907,7 @@ cd ..
 
 %files python
 %defattr(-,root,root,-)
-/usr/lib64/python*/*
+
+%files python3
+%defattr(-,root,root,-)
+/usr/lib/python3*/*
