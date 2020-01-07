@@ -4,7 +4,7 @@
 #
 Name     : ParaView
 Version  : 5.7.0
-Release  : 21
+Release  : 22
 URL      : https://github.com/Kitware/ParaView/archive/v5.7.0/ParaView-5.7.0.tar.gz
 Source0  : https://github.com/Kitware/ParaView/archive/v5.7.0/ParaView-5.7.0.tar.gz
 Source1  : http://www.paraview.org/files/v5.7/ParaViewData-v5.7.0.tar.gz
