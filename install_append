@@ -1,8 +1,8 @@
-mkdir -p %{buildroot}/usr/share/ParaView-5.7/examples
-cp ./DataPackage/Testing/Data/can.ex2 %{buildroot}/usr/share/ParaView-5.7/examples
-cp ./Testing/Data/can.ex2.sha512 %{buildroot}/usr/share/ParaView-5.7/examples
-cp ./DataPackage/Testing/Data/disk_out_ref.ex2 %{buildroot}/usr/share/ParaView-5.7/examples
-cp ./Testing/Data/disk_out_ref.ex2.sha512 %{buildroot}/usr/share/ParaView-5.7/examples
+mkdir -p %{buildroot}/usr/share/ParaView-5.8/examples
+cp ./DataPackage/Testing/Data/can.ex2 %{buildroot}/usr/share/ParaView-5.8/examples
+cp ./Testing/Data/can.ex2.sha512 %{buildroot}/usr/share/ParaView-5.8/examples
+cp ./DataPackage/Testing/Data/disk_out_ref.ex2 %{buildroot}/usr/share/ParaView-5.8/examples
+cp ./Testing/Data/disk_out_ref.ex2.sha512 %{buildroot}/usr/share/ParaView-5.8/examples
 mkdir -p %{buildroot}/usr/lib64
 mv %{buildroot}/usr/lib/libQtTesting* %{buildroot}/usr/lib64
 mkdir -p %{buildroot}/usr/lib64/cmake/qttesting
@@ -11,7 +11,7 @@ p3_version=$(/usr/bin/python3 -c "import sys; sys.stdout.write(sys.version[:3])"
 mkdir -p %{buildroot}/usr/lib/python$p3_version/site-packages
 mv  %{buildroot}/usr/lib64/python$p3_version/site-packages  %{buildroot}/usr/lib/python$p3_version
 
-mkdir -p %{buildroot}/usr/share/ParaView-5.7/data/ParaView-v5.7.0
+mkdir -p %{buildroot}/usr/share/ParaView-5.8/data/ParaView-v5.8.0
 cd ./DataPackage
-cp -a . %{buildroot}/usr/share/ParaView-5.7/data/ParaView-v5.7.0
+cp -a . %{buildroot}/usr/share/ParaView-5.8/data/ParaView-v5.8.0
 cd ..

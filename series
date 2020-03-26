@@ -1,4 +1,7 @@
-override.patch
 qttesting-default-to-qt5.patch
 shared-folder.patch
-0001-Python-3.8-compat-patch.patch
+cgns-4.0.patch
+cgns-4.0-1.patch
+cgns_cgio_api_changes.patch
+cgns-reader.patch
+python-syntax.patch

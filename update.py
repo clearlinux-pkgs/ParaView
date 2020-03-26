@@ -31,11 +31,12 @@ def get_path_urls(package):
             if os.path.split(package)[0]:
                 path_urls = f"{commit_url} {subm.split('/', maxsplit=1)[1]} " + path_urls
             else:
-                head_tail = os.path.split(path)
-                if not head_tail[0]:
-                    path_urls = f"{commit_url} {head_tail[1]} " + path_urls
-                else:
+                n = path.count('/') 
+                if n == 2:
+                    head_tail = os.path.split(path)
                     path_urls = f"{commit_url} {head_tail[0]} " + path_urls
+                else:
+                    path_urls = f"{commit_url} {path} " + path_urls
             if not os.path.isfile(f"{sha}.tar.bz2"):
                 subprocess.run(f"curl -L -O {commit_url}".split())
     except Exception as e:

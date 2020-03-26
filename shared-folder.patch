@@ -1,5 +1,5 @@
---- a/ParaViewCore/ClientServerCore/Default/vtkPVFileInformation.cxx-org	2019-09-26 13:59:18.000000000 -0700
-+++ b/ParaViewCore/ClientServerCore/Default/vtkPVFileInformation.cxx	2019-11-02 17:42:04.185351113 -0700
+--- a/Remoting/Core/vtkPVFileInformation.cxx-org	2019-09-26 13:59:18.000000000 -0700
++++ b/Remoting/Core/vtkPVFileInformation.cxx	2019-11-02 17:42:04.185351113 -0700
 @@ -1201,6 +1201,7 @@
  //-----------------------------------------------------------------------------
  std::string vtkPVFileInformation::GetParaViewSharedResourcesDirectory()
