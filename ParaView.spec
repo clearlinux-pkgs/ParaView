@@ -4,7 +4,7 @@
 #
 Name     : ParaView
 Version  : 5.8.0
-Release  : 30
+Release  : 31
 URL      : https://github.com/Kitware/ParaView/archive/v5.8.0/ParaView-5.8.0.tar.gz
 Source0  : https://github.com/Kitware/ParaView/archive/v5.8.0/ParaView-5.8.0.tar.gz
 Source1  : http://www.paraview.org/files/v5.8/ParaViewData-v5.8.0.tar.gz
@@ -23,6 +23,7 @@ Requires: ParaView-license = %{version}-%{release}
 Requires: ParaView-python = %{version}-%{release}
 Requires: ParaView-python3 = %{version}-%{release}
 BuildRequires : CGNS-dev
+BuildRequires : VTK-dev
 BuildRequires : boost-dev
 BuildRequires : buildreq-cmake
 BuildRequires : double-conversion-dev
@@ -210,7 +211,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1586271197
+export SOURCE_DATE_EPOCH=1588975209
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -244,7 +245,7 @@ make  %{?_smp_mflags}  VERBOSE=1
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1586271197
+export SOURCE_DATE_EPOCH=1588975209
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/ParaView
 cp %{_builddir}/ParaView-5.8.0/Clients/ParaView/Documentation/license.txt %{buildroot}/usr/share/package-licenses/ParaView/df128a6261c7007dde78a4281cde3799aee29c1e
