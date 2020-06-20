@@ -4,7 +4,7 @@
 #
 Name     : ParaView
 Version  : 5.8.0
-Release  : 31
+Release  : 32
 URL      : https://github.com/Kitware/ParaView/archive/v5.8.0/ParaView-5.8.0.tar.gz
 Source0  : https://github.com/Kitware/ParaView/archive/v5.8.0/ParaView-5.8.0.tar.gz
 Source1  : http://www.paraview.org/files/v5.8/ParaViewData-v5.8.0.tar.gz
@@ -211,7 +211,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1588975209
+export SOURCE_DATE_EPOCH=1592654859
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -241,11 +241,11 @@ export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 "
 -DVTK_MODULE_USE_EXTERNAL_VTK_libharu=OFF \
 -DVTK_MODULE_USE_EXTERNAL_VTK_gl2ps=OFF \
 -DQT_TESTING_WITH_PYTHON:BOOL=OFF
-make  %{?_smp_mflags}  VERBOSE=1
+make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1588975209
+export SOURCE_DATE_EPOCH=1592654859
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/ParaView
 cp %{_builddir}/ParaView-5.8.0/Clients/ParaView/Documentation/license.txt %{buildroot}/usr/share/package-licenses/ParaView/df128a6261c7007dde78a4281cde3799aee29c1e
