@@ -1,0 +1,41 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Juro Bystricky <juro.bystricky@intel.com>
+Date: Wed, 30 Oct 2019 12:47:10 -0700
+Subject: [PATCH] qttesting: default to qt5
+
+2021-02-21: Rebased for 5.9.0
+
+Signed-off-by: Patrick McCarty <patrick.mccarty@intel.com>
+---
+ ThirdParty/QtTesting/CMakeLists.txt | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/ThirdParty/QtTesting/CMakeLists.txt b/ThirdParty/QtTesting/CMakeLists.txt
+index b3b5f0dc..a77414fd 100644
+--- a/ThirdParty/QtTesting/CMakeLists.txt
++++ b/ThirdParty/QtTesting/CMakeLists.txt
+@@ -5,7 +5,7 @@ endif ()
+ PROJECT(QtTesting)
+ 
+ IF(NOT DEFINED QtTesting_QT_VERSION)
+-  SET(QtTesting_QT_VERSION "4" CACHE STRING "Expected Qt version")
++  SET(QtTesting_QT_VERSION "5" CACHE STRING "Expected Qt version")
+   MARK_AS_ADVANCED(QtTesting_QT_VERSION)
+   SET_PROPERTY(CACHE QtTesting_QT_VERSION PROPERTY STRINGS 4 5)
+ ENDIF()
+@@ -248,13 +248,13 @@ SET(QTTESTING_BUILD_SHARED_LIBS ${BUILD_SHARED_LIBS})
+ CONFIGURE_FILE(${QtTesting_SOURCE_DIR}/QtTestingConfigure.h.in
+                ${QtTesting_BINARY_DIR}/QtTestingConfigure.h)
+ 
+-if (FALSE)
++#if (FALSE)
+ INSTALL(TARGETS qttesting
+   EXPORT ${QT_TESTING_INSTALL_EXPORT_NAME}
+   RUNTIME DESTINATION ${QtTesting_INSTALL_BIN_DIR} COMPONENT Runtime
+   LIBRARY DESTINATION ${QtTesting_INSTALL_LIB_DIR} COMPONENT Runtime
+   ARCHIVE DESTINATION ${QtTesting_INSTALL_LIB_DIR} COMPONENT Development)
+-endif ()
++#endif ()
+ 
+ 
+ if (NOT DEFINED BUILD_EXAMPLES)

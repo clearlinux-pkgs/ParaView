@@ -1,0 +1,30 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Juro Bystricky <juro.bystricky@intel.com>
+Date: Wed, 30 Oct 2019 12:47:10 -0700
+Subject: [PATCH] shared folder
+
+---
+ Remoting/Core/vtkPVFileInformation.cxx | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/Remoting/Core/vtkPVFileInformation.cxx b/Remoting/Core/vtkPVFileInformation.cxx
+index 5473e5e0..26c13a7c 100644
+--- a/Remoting/Core/vtkPVFileInformation.cxx
++++ b/Remoting/Core/vtkPVFileInformation.cxx
+@@ -1203,6 +1203,7 @@ void vtkPVFileInformation::Initialize()
+ //-----------------------------------------------------------------------------
+ std::string vtkPVFileInformation::GetParaViewSharedResourcesDirectory()
+ {
++#if 0
+   // Look for where the function "GetVTKVersion." lives.
+   auto vtk_libs = vtkGetLibraryPathForSymbol(GetVTKVersion);
+ 
+@@ -1224,6 +1225,8 @@ std::string vtkPVFileInformation::GetParaViewSharedResourcesDirectory()
+   }
+ 
+   return resource_dir;
++#endif
++  return "/usr/share/ParaView-" PARAVIEW_VERSION;
+ }
+ 
+ //-----------------------------------------------------------------------------

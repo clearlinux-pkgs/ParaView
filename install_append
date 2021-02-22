@@ -1,17 +1,29 @@
-mkdir -p %{buildroot}/usr/share/ParaView-5.8/examples
-cp ./DataPackage/Testing/Data/can.ex2 %{buildroot}/usr/share/ParaView-5.8/examples
-cp ./Testing/Data/can.ex2.sha512 %{buildroot}/usr/share/ParaView-5.8/examples
-cp ./DataPackage/Testing/Data/disk_out_ref.ex2 %{buildroot}/usr/share/ParaView-5.8/examples
-cp ./Testing/Data/disk_out_ref.ex2.sha512 %{buildroot}/usr/share/ParaView-5.8/examples
-mkdir -p %{buildroot}/usr/lib64
-mv %{buildroot}/usr/lib/libQtTesting* %{buildroot}/usr/lib64
-mkdir -p %{buildroot}/usr/lib64/cmake/qttesting
-mv %{buildroot}/usr/lib/cmake/qttesting %{buildroot}/usr/lib64/cmake
-p3_version=$(/usr/bin/python3 -c "import sys; sys.stdout.write(sys.version[:3])")
-mkdir -p %{buildroot}/usr/lib/python$p3_version/site-packages
-mv  %{buildroot}/usr/lib64/python$p3_version/site-packages  %{buildroot}/usr/lib/python$p3_version
+## As of the v5.9.0 release, the ParaViewData-VER tarball appears to be named
+## ParaViewTestingDataFiles-VER instead, but that tarball is not published to the
+## download server. The create_tarballs.bash script can likely be used to populate
+## our own tarball, but for now, skip this step.
+## Reference: https://gitlab.kitware.com/paraview/paraview/-/commit/ea5e6d6762
+# dest=%{buildroot}/usr/share/ParaView-5.9/examples
+# mkdir -pv "$dest"
+# cp -av ./DataPackage/Testing/Data/can.ex2 "$dest"
+# cp -av ./Testing/Data/can.ex2.sha512 "$dest"
+# cp -av ./DataPackage/Testing/Data/disk_out_ref.ex2 "$dest"
+# cp -av ./Testing/Data/disk_out_ref.ex2.sha512 "$dest"
+# dest=%{buildroot}/usr/share/ParaView-5.9/data/ParaView-v5.9.0
+# mkdir -pv "$dest"
+# cp -a ./DataPackage/. "$dest"
 
-mkdir -p %{buildroot}/usr/share/ParaView-5.8/data/ParaView-v5.8.0
-cd ./DataPackage
-cp -a . %{buildroot}/usr/share/ParaView-5.8/data/ParaView-v5.8.0
-cd ..
+#dest=%{buildroot}/usr/lib64
+#mkdir -pv "$dest"
+#mv -v %{buildroot}/usr/lib/libQtTesting* "$dest"
+#
+#src=%{buildroot}/usr/lib/cmake/qttesting
+#dest=%{buildroot}/usr/lib64/cmake/qttesting
+#mkdir -pv "$dest"
+#mv -v "$src" "$dest"
+#
+#p3_version=$(/usr/bin/python3 -c "import sys; sys.stdout.write(sys.version[:3])")
+#src=%{buildroot}/usr/lib64/python$p3_version/site-packages
+#dest=%{buildroot}/usr/lib/python$p3_version/site-packages
+#mkdir -pv "$dest"
+#mv -v "$src" "$dest"

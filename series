@@ -1,7 +1,2 @@
-qttesting-default-to-qt5.patch
-shared-folder.patch
-cgns-4.0.patch
-cgns-4.0-1.patch
-cgns_cgio_api_changes.patch
-cgns-reader.patch
-python-syntax.patch
+0001-qttesting-default-to-qt5.patch
+0002-shared-folder.patch

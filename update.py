@@ -55,7 +55,7 @@ def fixup_makefile(package, tag):
         if line.startswith("ARCHIVES"):
             vs = tag.split('.')
             major_version = vs[0] + '.' + vs[1]
-            mcontent[idx] = f"ARCHIVES = http://www.paraview.org/files/{major_version}/ParaViewData-{tag}.tar.gz DataPackage {path_urls}\n"
+            mcontent[idx] = f"ARCHIVES = {path_urls}\n"
             break
     with open("Makefile", "w") as mfile:
         mfile.writelines(mcontent)

@@ -6,9 +6,8 @@ libQt5Gui.so.5
 libQt5Help.so.5
 libQt5Network.so.5
 libQt5Widgets.so.5
-libQt5X11Extras.so.5
 libX11.so.6
-libXt.so.6
+libXcursor.so.1
 libc.so.6
 libcgns.so.4.1
 libdl.so.2
@@ -26,10 +25,10 @@ libm.so.6
 libnetcdf.so.18
 libogg.so.0
 libpng16.so.16
-libprotobuf.so.22
+libprotobuf.so.23
 libpthread.so.0
 libpugixml.so.1
-libpython3.8.so.1.0
+libpython3.9.so.1.0
 libstdc++.so.6
 libtheoradec.so.1
 libtheoraenc.so.1
