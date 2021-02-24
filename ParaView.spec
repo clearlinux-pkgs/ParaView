@@ -4,7 +4,7 @@
 #
 Name     : ParaView
 Version  : 5.9.0
-Release  : 37
+Release  : 38
 URL      : https://github.com/Kitware/ParaView/archive/v5.9.0/ParaView-5.9.0.tar.gz
 Source0  : https://github.com/Kitware/ParaView/archive/v5.9.0/ParaView-5.9.0.tar.gz
 Source1  : https://gitlab.kitware.com/paraview/catalyst/-/archive/84b8e8d155af5bd97914c4d8c0d768c3b858e1cf/catalyst-84b8e8d155af5bd97914c4d8c0d768c3b858e1cf.tar.bz2
@@ -43,7 +43,6 @@ BuildRequires : libXres-dev
 BuildRequires : libXt-dev
 BuildRequires : libXtst-dev
 BuildRequires : libXv-dev
-BuildRequires : libXxf86misc-dev
 BuildRequires : libjpeg-turbo-dev
 BuildRequires : libogg-dev
 BuildRequires : libtheora-dev

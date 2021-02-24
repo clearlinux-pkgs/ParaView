@@ -17,7 +17,6 @@ libXres-dev
 libXt-dev
 libXtst-dev
 libXv-dev
-libXxf86misc-dev
 libjpeg-turbo-dev
 libogg-dev
 libtheora-dev
