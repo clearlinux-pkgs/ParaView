@@ -1,0 +1,22 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Ben Boeckel <ben.boeckel@kitware.com>
+Date: Mon, 3 May 2021 11:55:27 -0400
+Subject: [PATCH] vtkDataArrayPrivate: include <limits> for std::numeric_limits
+
+See: #18194
+---
+ VTK/Common/Core/vtkDataArrayPrivate.txx | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/VTK/Common/Core/vtkDataArrayPrivate.txx b/VTK/Common/Core/vtkDataArrayPrivate.txx
+index eb366f1c..6709f7f3 100644
+--- a/VTK/Common/Core/vtkDataArrayPrivate.txx
++++ b/VTK/Common/Core/vtkDataArrayPrivate.txx
+@@ -24,6 +24,7 @@
+ #include <algorithm>
+ #include <array>
+ #include <cassert> // for assert()
++#include <limits>
+ #include <vector>
+ 
+ namespace vtkDataArrayPrivate

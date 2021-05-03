@@ -4,7 +4,7 @@
 #
 Name     : ParaView
 Version  : 5.9.0
-Release  : 39
+Release  : 40
 URL      : https://github.com/Kitware/ParaView/archive/v5.9.0/ParaView-5.9.0.tar.gz
 Source0  : https://github.com/Kitware/ParaView/archive/v5.9.0/ParaView-5.9.0.tar.gz
 Source1  : https://gitlab.kitware.com/paraview/catalyst/-/archive/84b8e8d155af5bd97914c4d8c0d768c3b858e1cf/catalyst-84b8e8d155af5bd97914c4d8c0d768c3b858e1cf.tar.bz2
@@ -69,6 +69,8 @@ BuildRequires : utf8cpp-dev
 BuildRequires : xz-dev
 Patch1: 0001-qttesting-default-to-qt5.patch
 Patch2: 0002-shared-folder.patch
+Patch3: 0003-vtkDataArrayPrivate-include-limits-for-std-numeric_l.patch
+Patch4: 0004-Add-more-missing-includes.patch
 
 %description
 ParaView is an open-source, multi-platform data analysis and visualization
@@ -183,6 +185,8 @@ mkdir -p ThirdParty/IceT
 cp -r %{_builddir}/icet-61e37d02157e0bbc337e4e628813ab5c929a1eb1/* %{_builddir}/ParaView-5.9.0/ThirdParty/IceT
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
+%patch4 -p1
 
 %build
 ## build_prepend content
@@ -192,7 +196,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1614027675
+export SOURCE_DATE_EPOCH=1620074363
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -229,7 +233,7 @@ make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1614027675
+export SOURCE_DATE_EPOCH=1620074363
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/ParaView
 cp %{_builddir}/ParaView-5.9.0/Clients/ParaView/Documentation/license.txt %{buildroot}/usr/share/package-licenses/ParaView/df128a6261c7007dde78a4281cde3799aee29c1e

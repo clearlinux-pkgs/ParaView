@@ -1,2 +1,4 @@
 0001-qttesting-default-to-qt5.patch
 0002-shared-folder.patch
+0003-vtkDataArrayPrivate-include-limits-for-std-numeric_l.patch
+0004-Add-more-missing-includes.patch
