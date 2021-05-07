@@ -4,7 +4,7 @@
 #
 Name     : ParaView
 Version  : 5.9.0
-Release  : 41
+Release  : 42
 URL      : https://github.com/Kitware/ParaView/archive/v5.9.0/ParaView-5.9.0.tar.gz
 Source0  : https://github.com/Kitware/ParaView/archive/v5.9.0/ParaView-5.9.0.tar.gz
 Source1  : https://gitlab.kitware.com/paraview/catalyst/-/archive/84b8e8d155af5bd97914c4d8c0d768c3b858e1cf/catalyst-84b8e8d155af5bd97914c4d8c0d768c3b858e1cf.tar.bz2
