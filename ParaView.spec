@@ -4,7 +4,7 @@
 #
 Name     : ParaView
 Version  : 5.9.1
-Release  : 46
+Release  : 47
 URL      : https://github.com/Kitware/ParaView/archive/v5.9.1/ParaView-5.9.1.tar.gz
 Source0  : https://github.com/Kitware/ParaView/archive/v5.9.1/ParaView-5.9.1.tar.gz
 Source1  : https://gitlab.kitware.com/paraview/catalyst/-/archive/e36e4a5f3c67011c97c335cce23d2bc3abc0d086/catalyst-e36e4a5f3c67011c97c335cce23d2bc3abc0d086.tar.bz2
@@ -18,6 +18,7 @@ Group    : Development/Tools
 License  : Apache-2.0 BSD-2-Clause BSD-3-Clause BSD-3-Clause-Attribution BSD-3-Clause-LBNL BSL-1.0 CC-BY-3.0 CC-PDDC FTL GL2PS GPL-2.0 Libpng MIT MPL-2.0 MPL-2.0-no-copyleft-exception NCSA Zlib libtiff
 Requires: ParaView-bin = %{version}-%{release}
 Requires: ParaView-data = %{version}-%{release}
+Requires: ParaView-filemap = %{version}-%{release}
 Requires: ParaView-lib = %{version}-%{release}
 Requires: ParaView-license = %{version}-%{release}
 Requires: ParaView-python = %{version}-%{release}
@@ -85,6 +86,7 @@ Summary: bin components for the ParaView package.
 Group: Binaries
 Requires: ParaView-data = %{version}-%{release}
 Requires: ParaView-license = %{version}-%{release}
+Requires: ParaView-filemap = %{version}-%{release}
 
 %description bin
 bin components for the ParaView package.
@@ -119,11 +121,20 @@ Group: Documentation
 doc components for the ParaView package.
 
 
+%package filemap
+Summary: filemap components for the ParaView package.
+Group: Default
+
+%description filemap
+filemap components for the ParaView package.
+
+
 %package lib
 Summary: lib components for the ParaView package.
 Group: Libraries
 Requires: ParaView-data = %{version}-%{release}
 Requires: ParaView-license = %{version}-%{release}
+Requires: ParaView-filemap = %{version}-%{release}
 
 %description lib
 lib components for the ParaView package.
@@ -141,6 +152,7 @@ license components for the ParaView package.
 Summary: python components for the ParaView package.
 Group: Default
 Requires: ParaView-python3 = %{version}-%{release}
+Requires: ParaView-filemap = %{version}-%{release}
 Provides: paraview-python
 
 %description python
@@ -196,17 +208,58 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1624475724
+export SOURCE_DATE_EPOCH=1634663858
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
-export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
-export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
-export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
-export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 "
+export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=auto "
+export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto "
+export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto "
+export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=auto "
+%cmake .. -DCMAKE_INSTALL_LIBDIR=lib64 \
+-DCMAKE_SKIP_RPATH:BOOL=OFF \
+-DPARAVIEW_BUILD_EXAMPLES=ON \
+-DPARAVIEW_BUILD_SHARED_LIBS=ON \
+-DPARAVIEW_BUILD_TESTING=OFF \
+-DPARAVIEW_BUILD_WITH_EXTERNAL:BOOL=ON \
+-DPARAVIEW_ENABLE_GDAL:BOOL=ON \
+-DPARAVIEW_ENABLE_VISITBRIDGE:BOOL=ON \
+-DPARAVIEW_PLUGINS_DEFAULT:BOOL=ON \
+-DPARAVIEW_PLUGIN_ENABLE_SLACTools:BOOL=ON \
+-DPARAVIEW_PYTHON_SITE_PACKAGES_SUFFIX=lib/python$py3_version/site-packages \
+-DPARAVIEW_USE_MPI=OFF \
+-DPARAVIEW_USE_PYTHON:BOOL=ON \
+-DPARAVIEW_USE_QT:BOOL=ON \
+-DPARAVIEW_USE_VTKM:BOOL=OFF \
+-DQT_TESTING_WITH_PYTHON:BOOL=OFF \
+-DQtTesting_INSTALL_CMAKE_DIR=lib64/cmake/qttesting \
+-DQtTesting_INSTALL_LIB_DIR=lib64 \
+-DVTK_MODULE_USE_EXTERNAL_VTK_gl2ps=OFF \
+-DVTK_MODULE_USE_EXTERNAL_VTK_libharu=OFF \
+-DVTK_OPENGL_HAS_OSMESA:BOOL=OFF \
+-DVTK_WRAP_PYTHON:BOOL=ON
+make  %{?_smp_mflags}
+popd
+mkdir -p clr-build-avx2
+pushd clr-build-avx2
+## build_prepend content
+py3_version=$(python3 -c "import sys; print(sys.version[:3])")
+## build_prepend end
+export GCC_IGNORE_WERROR=1
+export AR=gcc-ar
+export RANLIB=gcc-ranlib
+export NM=gcc-nm
+export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=auto -march=x86-64-v3 -mtune=skylake "
+export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto -march=x86-64-v3 -mtune=skylake "
+export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto -march=x86-64-v3 -mtune=skylake "
+export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=auto -march=x86-64-v3 -mtune=skylake "
+export CFLAGS="$CFLAGS -march=x86-64-v3 -m64"
+export CXXFLAGS="$CXXFLAGS -march=x86-64-v3 -m64"
+export FFLAGS="$FFLAGS -march=x86-64-v3 -m64"
+export FCFLAGS="$FCFLAGS -march=x86-64-v3 -m64"
 %cmake .. -DCMAKE_INSTALL_LIBDIR=lib64 \
 -DCMAKE_SKIP_RPATH:BOOL=OFF \
 -DPARAVIEW_BUILD_EXAMPLES=ON \
@@ -233,7 +286,7 @@ make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1624475724
+export SOURCE_DATE_EPOCH=1634663858
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/ParaView
 cp %{_builddir}/ParaView-5.9.1/Clients/ParaView/Documentation/license.txt %{buildroot}/usr/share/package-licenses/ParaView/df128a6261c7007dde78a4281cde3799aee29c1e
@@ -313,6 +366,9 @@ cp %{_builddir}/vtk-m-0457427ed7b4d21e1a8e33e96713414ca11a42fc/Utilities/GitSetu
 cp %{_builddir}/vtk-m-0457427ed7b4d21e1a8e33e96713414ca11a42fc/vtkm/thirdparty/diy/vtkmdiy/LICENSE.txt %{buildroot}/usr/share/package-licenses/ParaView/d28d71e6570dd1964e2c992ed10a13ae67a2f840
 cp %{_builddir}/vtk-m-0457427ed7b4d21e1a8e33e96713414ca11a42fc/vtkm/thirdparty/lcl/vtkmlcl/LICENSE.md %{buildroot}/usr/share/package-licenses/ParaView/2550e25f2662dface4d8187b78af2adecdb520ef
 cp %{_builddir}/vtk-m-0457427ed7b4d21e1a8e33e96713414ca11a42fc/vtkm/thirdparty/lodepng/vtkmlodepng/LICENSE %{buildroot}/usr/share/package-licenses/ParaView/7f11c0b5bfdf1146144bd11ce39af61c8296bc86
+pushd clr-build-avx2
+%make_install_v3  || :
+popd
 pushd clr-build
 %make_install
 popd
@@ -347,6 +403,7 @@ popd
 #mkdir -pv "$dest"
 #mv -v "$src" "$dest"
 ## install_append end
+/usr/bin/elf-move.py avx2 %{buildroot}-v3 %{buildroot}/usr/share/clear/optimized-elf/ %{buildroot}/usr/share/clear/filemap/filemap-%{name}
 
 %files
 %defattr(-,root,root,-)
@@ -534,6 +591,7 @@ popd
 /usr/bin/vtkWrapJava-pv5.9
 /usr/bin/vtkWrapPython-pv5.9
 /usr/bin/vtkWrapPythonInit-pv5.9
+/usr/share/clear/optimized-elf/bin*
 
 %files data
 %defattr(-,root,root,-)
@@ -5329,6 +5387,10 @@ popd
 %defattr(0644,root,root,0755)
 %doc /usr/share/doc/ParaView/*
 
+%files filemap
+%defattr(-,root,root,-)
+/usr/share/clear/filemap/filemap-ParaView
+
 %files lib
 %defattr(-,root,root,-)
 /usr/lib64/libQtTesting.so.1
@@ -5729,6 +5791,8 @@ popd
 /usr/lib64/paraview-5.9/plugins/SurfaceLIC/libvtkSurfaceLICRepresentations.so
 /usr/lib64/paraview-5.9/plugins/ThickenLayeredCells/ThickenLayeredCells.so
 /usr/lib64/paraview-5.9/plugins/ThickenLayeredCells/libvtkThickenLayeredCellsFilters.so
+/usr/share/clear/optimized-elf/lib*
+/usr/share/clear/optimized-elf/other*
 
 %files license
 %defattr(0644,root,root,0755)
