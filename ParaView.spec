@@ -4,7 +4,7 @@
 #
 Name     : ParaView
 Version  : 5.9.1
-Release  : 50
+Release  : 51
 URL      : https://github.com/Kitware/ParaView/archive/v5.9.1/ParaView-5.9.1.tar.gz
 Source0  : https://github.com/Kitware/ParaView/archive/v5.9.1/ParaView-5.9.1.tar.gz
 Source1  : https://gitlab.kitware.com/paraview/catalyst/-/archive/e36e4a5f3c67011c97c335cce23d2bc3abc0d086/catalyst-e36e4a5f3c67011c97c335cce23d2bc3abc0d086.tar.bz2
@@ -208,7 +208,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1634663858
+export SOURCE_DATE_EPOCH=1635539654
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -252,14 +252,14 @@ export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
-export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=auto -march=x86-64-v3 -mtune=skylake "
-export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto -march=x86-64-v3 -mtune=skylake "
-export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto -march=x86-64-v3 -mtune=skylake "
-export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=auto -march=x86-64-v3 -mtune=skylake "
-export CFLAGS="$CFLAGS -march=x86-64-v3 -m64"
-export CXXFLAGS="$CXXFLAGS -march=x86-64-v3 -m64"
-export FFLAGS="$FFLAGS -march=x86-64-v3 -m64"
-export FCFLAGS="$FCFLAGS -march=x86-64-v3 -m64"
+export CFLAGS="$CFLAGS -O3 -Wl,-z,x86-64-v3 -ffat-lto-objects -flto=auto -march=x86-64-v3 -mtune=skylake "
+export FCFLAGS="$FFLAGS -O3 -Wl,-z,x86-64-v3 -ffat-lto-objects -flto=auto -march=x86-64-v3 -mtune=skylake "
+export FFLAGS="$FFLAGS -O3 -Wl,-z,x86-64-v3 -ffat-lto-objects -flto=auto -march=x86-64-v3 -mtune=skylake "
+export CXXFLAGS="$CXXFLAGS -O3 -Wl,-z,x86-64-v3 -ffat-lto-objects -flto=auto -march=x86-64-v3 -mtune=skylake "
+export CFLAGS="$CFLAGS -march=x86-64-v3 -m64 -Wl,-z,x86-64-v3"
+export CXXFLAGS="$CXXFLAGS -march=x86-64-v3 -m64 -Wl,-z,x86-64-v3"
+export FFLAGS="$FFLAGS -march=x86-64-v3 -m64 -Wl,-z,x86-64-v3"
+export FCFLAGS="$FCFLAGS -march=x86-64-v3 -m64 -Wl,-z,x86-64-v3"
 %cmake .. -DCMAKE_INSTALL_LIBDIR=lib64 \
 -DCMAKE_SKIP_RPATH:BOOL=OFF \
 -DPARAVIEW_BUILD_EXAMPLES=ON \
@@ -286,7 +286,7 @@ make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1634663858
+export SOURCE_DATE_EPOCH=1635539654
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/ParaView
 cp %{_builddir}/ParaView-5.9.1/Clients/ParaView/Documentation/license.txt %{buildroot}/usr/share/package-licenses/ParaView/df128a6261c7007dde78a4281cde3799aee29c1e
@@ -5369,7 +5369,7 @@ popd
 /usr/lib64/libvtkViewsCore-pv5.9.so
 /usr/lib64/libvtkWebCore-pv5.9.so
 /usr/lib64/libvtkWebGLExporter-pv5.9.so
-/usr/lib64/libvtkWrappingPythonCore3.9-pv5.9.so
+/usr/lib64/libvtkWrappingPythonCore3.10-pv5.9.so
 /usr/lib64/libvtkWrappingTools-pv5.9.so
 /usr/lib64/libvtkexodusII-pv5.9.so
 /usr/lib64/libvtkgl2ps-pv5.9.so
@@ -5718,8 +5718,8 @@ popd
 /usr/lib64/libvtkWebCore-pv5.9.so.5.9
 /usr/lib64/libvtkWebGLExporter-pv5.9.so.1
 /usr/lib64/libvtkWebGLExporter-pv5.9.so.5.9
-/usr/lib64/libvtkWrappingPythonCore3.9-pv5.9.so.1
-/usr/lib64/libvtkWrappingPythonCore3.9-pv5.9.so.5.9
+/usr/lib64/libvtkWrappingPythonCore3.10-pv5.9.so.1
+/usr/lib64/libvtkWrappingPythonCore3.10-pv5.9.so.5.9
 /usr/lib64/libvtkWrappingTools-pv5.9.so.1
 /usr/lib64/libvtkWrappingTools-pv5.9.so.5.9
 /usr/lib64/libvtkexodusII-pv5.9.so.1
