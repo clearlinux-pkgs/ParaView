@@ -4,7 +4,7 @@
 #
 Name     : ParaView
 Version  : 5.9.1
-Release  : 52
+Release  : 53
 URL      : https://github.com/Kitware/ParaView/archive/v5.9.1/ParaView-5.9.1.tar.gz
 Source0  : https://github.com/Kitware/ParaView/archive/v5.9.1/ParaView-5.9.1.tar.gz
 Source1  : https://gitlab.kitware.com/paraview/catalyst/-/archive/e36e4a5f3c67011c97c335cce23d2bc3abc0d086/catalyst-e36e4a5f3c67011c97c335cce23d2bc3abc0d086.tar.bz2
@@ -50,13 +50,13 @@ BuildRequires : libtheora-dev
 BuildRequires : libxkbfile-dev
 BuildRequires : libxml2-dev
 BuildRequires : lz4-dev
-BuildRequires : matplotlib-python3
 BuildRequires : netcdf-dev
 BuildRequires : openmpi-dev
 BuildRequires : perl
 BuildRequires : pkg-config
 BuildRequires : protobuf-dev
 BuildRequires : pugixml-dev
+BuildRequires : pypi(matplotlib)
 BuildRequires : python3-dev
 BuildRequires : qtbase-dev mesa-dev
 BuildRequires : qtsvg-dev
@@ -208,7 +208,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1635539654
+export SOURCE_DATE_EPOCH=1641660123
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -286,7 +286,7 @@ make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1635539654
+export SOURCE_DATE_EPOCH=1641660123
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/ParaView
 cp %{_builddir}/ParaView-5.9.1/Clients/ParaView/Documentation/license.txt %{buildroot}/usr/share/package-licenses/ParaView/df128a6261c7007dde78a4281cde3799aee29c1e
