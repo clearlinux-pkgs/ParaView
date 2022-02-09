@@ -4,7 +4,7 @@
 #
 Name     : ParaView
 Version  : 5.9.1
-Release  : 55
+Release  : 56
 URL      : https://github.com/Kitware/ParaView/archive/v5.9.1/ParaView-5.9.1.tar.gz
 Source0  : https://github.com/Kitware/ParaView/archive/v5.9.1/ParaView-5.9.1.tar.gz
 Source1  : https://gitlab.kitware.com/paraview/catalyst/-/archive/e36e4a5f3c67011c97c335cce23d2bc3abc0d086/catalyst-e36e4a5f3c67011c97c335cce23d2bc3abc0d086.tar.bz2
@@ -202,13 +202,13 @@ cp -r %{_builddir}/icet-61e37d02157e0bbc337e4e628813ab5c929a1eb1/* %{_builddir}/
 
 %build
 ## build_prepend content
-py3_version=$(python3 -c "import sys; print(sys.version[:3])")
+py3_version=$(python3 -c 'import sys; print(f"{sys.version_info[0]}.{sys.version_info[1]}")')
 ## build_prepend end
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1641660123
+export SOURCE_DATE_EPOCH=1644445997
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -246,7 +246,7 @@ popd
 mkdir -p clr-build-avx2
 pushd clr-build-avx2
 ## build_prepend content
-py3_version=$(python3 -c "import sys; print(sys.version[:3])")
+py3_version=$(python3 -c 'import sys; print(f"{sys.version_info[0]}.{sys.version_info[1]}")')
 ## build_prepend end
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
@@ -286,7 +286,7 @@ make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1641660123
+export SOURCE_DATE_EPOCH=1644445997
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/ParaView
 cp %{_builddir}/ParaView-5.9.1/Clients/ParaView/Documentation/license.txt %{buildroot}/usr/share/package-licenses/ParaView/df128a6261c7007dde78a4281cde3799aee29c1e
