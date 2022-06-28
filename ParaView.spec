@@ -4,7 +4,7 @@
 #
 Name     : ParaView
 Version  : 5.9.1
-Release  : 56
+Release  : 57
 URL      : https://github.com/Kitware/ParaView/archive/v5.9.1/ParaView-5.9.1.tar.gz
 Source0  : https://github.com/Kitware/ParaView/archive/v5.9.1/ParaView-5.9.1.tar.gz
 Source1  : https://gitlab.kitware.com/paraview/catalyst/-/archive/e36e4a5f3c67011c97c335cce23d2bc3abc0d086/catalyst-e36e4a5f3c67011c97c335cce23d2bc3abc0d086.tar.bz2
@@ -152,7 +152,6 @@ license components for the ParaView package.
 Summary: python components for the ParaView package.
 Group: Default
 Requires: ParaView-python3 = %{version}-%{release}
-Requires: ParaView-filemap = %{version}-%{release}
 Provides: paraview-python
 
 %description python
@@ -162,6 +161,7 @@ python components for the ParaView package.
 %package python3
 Summary: python3 components for the ParaView package.
 Group: Default
+Requires: ParaView-filemap = %{version}-%{release}
 Requires: python3-core
 
 %description python3
@@ -208,7 +208,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1644445997
+export SOURCE_DATE_EPOCH=1656458875
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -252,10 +252,10 @@ export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
-export CFLAGS="$CFLAGS -O3 -Wl,-z,x86-64-v3 -ffat-lto-objects -flto=auto -march=x86-64-v3 -mtune=skylake "
-export FCFLAGS="$FFLAGS -O3 -Wl,-z,x86-64-v3 -ffat-lto-objects -flto=auto -march=x86-64-v3 -mtune=skylake "
-export FFLAGS="$FFLAGS -O3 -Wl,-z,x86-64-v3 -ffat-lto-objects -flto=auto -march=x86-64-v3 -mtune=skylake "
-export CXXFLAGS="$CXXFLAGS -O3 -Wl,-z,x86-64-v3 -ffat-lto-objects -flto=auto -march=x86-64-v3 -mtune=skylake "
+export CFLAGS="$CFLAGS -O3 -Wl,-z,x86-64-v3 -ffat-lto-objects -flto=auto -march=x86-64-v3 -msse2avx -mtune=skylake "
+export FCFLAGS="$FFLAGS -O3 -Wl,-z,x86-64-v3 -ffat-lto-objects -flto=auto -march=x86-64-v3 -msse2avx -mtune=skylake "
+export FFLAGS="$FFLAGS -O3 -Wl,-z,x86-64-v3 -ffat-lto-objects -flto=auto -march=x86-64-v3 -msse2avx -mtune=skylake "
+export CXXFLAGS="$CXXFLAGS -O3 -Wl,-z,x86-64-v3 -ffat-lto-objects -flto=auto -march=x86-64-v3 -msse2avx -mtune=skylake "
 export CFLAGS="$CFLAGS -march=x86-64-v3 -m64 -Wl,-z,x86-64-v3"
 export CXXFLAGS="$CXXFLAGS -march=x86-64-v3 -m64 -Wl,-z,x86-64-v3"
 export FFLAGS="$FFLAGS -march=x86-64-v3 -m64 -Wl,-z,x86-64-v3"
@@ -286,7 +286,7 @@ make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1644445997
+export SOURCE_DATE_EPOCH=1656458875
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/ParaView
 cp %{_builddir}/ParaView-5.9.1/Clients/ParaView/Documentation/license.txt %{buildroot}/usr/share/package-licenses/ParaView/df128a6261c7007dde78a4281cde3799aee29c1e
@@ -403,7 +403,7 @@ popd
 #mkdir -pv "$dest"
 #mv -v "$src" "$dest"
 ## install_append end
-/usr/bin/elf-move.py avx2 %{buildroot}-v3 %{buildroot}/usr/share/clear/optimized-elf/ %{buildroot}/usr/share/clear/filemap/filemap-%{name}
+/usr/bin/elf-move.py avx2 %{buildroot}-v3 %{buildroot} %{buildroot}/usr/share/clear/filemap/filemap-%{name}
 
 %files
 %defattr(-,root,root,-)
@@ -5206,6 +5206,182 @@ popd
 /usr/lib64/cmake/qttesting/QtTestingConfig.cmake
 /usr/lib64/cmake/qttesting/QtTestingTargets-relwithdebinfo.cmake
 /usr/lib64/cmake/qttesting/QtTestingTargets.cmake
+/usr/lib64/glibc-hwcaps/x86-64-v3/libQtTesting.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libavtdatabase_ser-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libavtdbatts-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libavtmath-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libavtpipeline_ser-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libcatalyst.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/liblightweight_visit_vtk-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libpqApplicationComponents-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libpqComponents-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libpqCore-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libpqPython-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libpqWidgets-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvisit_vtk-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvisitcommon-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkChartsCore-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkCommonColor-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkCommonComputationalGeometry-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkCommonCore-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkCommonDataModel-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkCommonExecutionModel-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkCommonMath-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkCommonMisc-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkCommonSystem-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkCommonTransforms-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkDICOMParser-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkDomainsChemistry-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkDomainsChemistryOpenGL2-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkFiltersAMR-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkFiltersCore-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkFiltersExtraction-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkFiltersFlowPaths-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkFiltersGeneral-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkFiltersGeneric-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkFiltersGeometry-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkFiltersHybrid-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkFiltersHyperTree-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkFiltersModeling-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkFiltersParallel-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkFiltersParallelDIY2-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkFiltersParallelStatistics-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkFiltersParallelVerdict-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkFiltersPoints-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkFiltersProgrammable-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkFiltersPython-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkFiltersSources-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkFiltersStatistics-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkFiltersTexture-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkFiltersVerdict-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkGUISupportQt-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOAMR-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOAsynchronous-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOCONVERGECFD-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOCityGML-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOCore-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOEnSight-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOExodus-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOExport-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOExportGL2PS-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOGDAL-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOGeometry-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOH5Rage-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOH5part-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOImage-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOImport-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOInfovis-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOIoss-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOLSDyna-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOLegacy-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOMovie-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIONetCDF-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOOggTheora-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOPIO-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOPLY-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOParallel-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOParallelExodus-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOParallelLSDyna-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOParallelXML-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOSegY-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOTRUCHAS-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOTecplotTable-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOVPIC-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOVeraOut-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOVisItBridge-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOXML-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOXMLParser-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOXdmf2-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkImagingColor-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkImagingCore-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkImagingFourier-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkImagingGeneral-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkImagingHybrid-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkImagingMath-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkImagingSources-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkInfovisCore-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkInteractionStyle-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkInteractionWidgets-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkPVAdaptorsCam-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkPVAdaptorsPagosa-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkPVAdaptorsPhasta-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkPVCatalyst-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkPVClientWeb-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkPVInSitu-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkPVPythonCatalyst-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkPVVTKExtensionsAMR-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkPVVTKExtensionsCGNSReader-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkPVVTKExtensionsCGNSWriter-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkPVVTKExtensionsConduit-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkPVVTKExtensionsCore-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkPVVTKExtensionsExtraction-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkPVVTKExtensionsExtractionPython-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkPVVTKExtensionsFiltersGeneral-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkPVVTKExtensionsFiltersMaterialInterface-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkPVVTKExtensionsFiltersPython-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkPVVTKExtensionsFiltersRendering-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkPVVTKExtensionsFiltersStatistics-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkPVVTKExtensionsIOAMR-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkPVVTKExtensionsIOCore-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkPVVTKExtensionsIOEnSight-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkPVVTKExtensionsIOExodus-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkPVVTKExtensionsIOGeneral-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkPVVTKExtensionsIOImage-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkPVVTKExtensionsIOSPCTH-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkPVVTKExtensionsInteractionStyle-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkPVVTKExtensionsMisc-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkPVVTKExtensionsPoints-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkParallelCore-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkParallelDIY-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkPythonInterpreter-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkRemotingAnimation-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkRemotingApplication-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkRemotingClientServerStream-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkRemotingCore-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkRemotingExport-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkRemotingLive-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkRemotingMisc-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkRemotingServerManager-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkRemotingServerManagerPython-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkRemotingSettings-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkRemotingViews-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkRemotingViewsPython-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkRenderingAnnotation-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkRenderingContext2D-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkRenderingContextOpenGL2-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkRenderingCore-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkRenderingFreeType-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkRenderingGL2PSOpenGL2-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkRenderingLICOpenGL2-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkRenderingLabel-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkRenderingMatplotlib-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkRenderingOpenGL2-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkRenderingParallel-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkRenderingSceneGraph-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkRenderingUI-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkRenderingVolume-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkRenderingVolumeAMR-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkRenderingVolumeOpenGL2-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkRenderingVtkJS-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkTestingRendering-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkUtilitiesPythonInitializer-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkViewsContext2D-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkViewsCore-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkWebCore-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkWebGLExporter-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkWrappingPythonCore3.10-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkWrappingTools-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkexodusII-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkgl2ps-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkh5part-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkioss-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtklibharu-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkloguru-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkmetaio-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtksys-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkverdict-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkvpic-pv5.9.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkxdmf2-pv5.9.so
 /usr/lib64/libQtTesting.so
 /usr/lib64/libavtdatabase_ser-pv5.9.so
 /usr/lib64/libavtdbatts-pv5.9.so
@@ -5393,6 +5569,357 @@ popd
 
 %files lib
 %defattr(-,root,root,-)
+/usr/lib64/glibc-hwcaps/x86-64-v3/libQtTesting.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libQtTesting.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libavtdatabase_ser-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libavtdatabase_ser-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libavtdbatts-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libavtdbatts-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libavtmath-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libavtmath-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libavtpipeline_ser-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libavtpipeline_ser-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libcatalyst.so.2
+/usr/lib64/glibc-hwcaps/x86-64-v3/liblightweight_visit_vtk-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/liblightweight_visit_vtk-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libpqApplicationComponents-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libpqApplicationComponents-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libpqComponents-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libpqComponents-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libpqCore-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libpqCore-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libpqPython-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libpqPython-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libpqWidgets-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libpqWidgets-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvisit_vtk-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvisit_vtk-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvisitcommon-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvisitcommon-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkChartsCore-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkChartsCore-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkCommonColor-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkCommonColor-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkCommonComputationalGeometry-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkCommonComputationalGeometry-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkCommonCore-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkCommonCore-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkCommonDataModel-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkCommonDataModel-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkCommonExecutionModel-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkCommonExecutionModel-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkCommonMath-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkCommonMath-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkCommonMisc-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkCommonMisc-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkCommonSystem-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkCommonSystem-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkCommonTransforms-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkCommonTransforms-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkDICOMParser-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkDICOMParser-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkDomainsChemistry-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkDomainsChemistry-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkDomainsChemistryOpenGL2-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkDomainsChemistryOpenGL2-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkFiltersAMR-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkFiltersAMR-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkFiltersCore-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkFiltersCore-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkFiltersExtraction-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkFiltersExtraction-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkFiltersFlowPaths-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkFiltersFlowPaths-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkFiltersGeneral-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkFiltersGeneral-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkFiltersGeneric-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkFiltersGeneric-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkFiltersGeometry-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkFiltersGeometry-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkFiltersHybrid-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkFiltersHybrid-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkFiltersHyperTree-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkFiltersHyperTree-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkFiltersModeling-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkFiltersModeling-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkFiltersParallel-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkFiltersParallel-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkFiltersParallelDIY2-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkFiltersParallelDIY2-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkFiltersParallelStatistics-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkFiltersParallelStatistics-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkFiltersParallelVerdict-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkFiltersParallelVerdict-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkFiltersPoints-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkFiltersPoints-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkFiltersProgrammable-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkFiltersProgrammable-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkFiltersPython-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkFiltersPython-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkFiltersSources-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkFiltersSources-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkFiltersStatistics-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkFiltersStatistics-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkFiltersTexture-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkFiltersTexture-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkFiltersVerdict-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkFiltersVerdict-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkGUISupportQt-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkGUISupportQt-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOAMR-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOAMR-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOAsynchronous-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOAsynchronous-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOCONVERGECFD-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOCONVERGECFD-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOCityGML-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOCityGML-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOCore-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOCore-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOEnSight-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOEnSight-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOExodus-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOExodus-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOExport-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOExport-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOExportGL2PS-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOExportGL2PS-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOGDAL-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOGDAL-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOGeometry-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOGeometry-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOH5Rage-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOH5Rage-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOH5part-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOH5part-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOImage-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOImage-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOImport-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOImport-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOInfovis-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOInfovis-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOIoss-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOIoss-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOLSDyna-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOLSDyna-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOLegacy-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOLegacy-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOMovie-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOMovie-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIONetCDF-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIONetCDF-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOOggTheora-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOOggTheora-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOPIO-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOPIO-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOPLY-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOPLY-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOParallel-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOParallel-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOParallelExodus-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOParallelExodus-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOParallelLSDyna-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOParallelLSDyna-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOParallelXML-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOParallelXML-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOSegY-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOSegY-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOTRUCHAS-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOTRUCHAS-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOTecplotTable-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOTecplotTable-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOVPIC-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOVPIC-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOVeraOut-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOVeraOut-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOVisItBridge-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOVisItBridge-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOXML-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOXML-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOXMLParser-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOXMLParser-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOXdmf2-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOXdmf2-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkImagingColor-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkImagingColor-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkImagingCore-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkImagingCore-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkImagingFourier-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkImagingFourier-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkImagingGeneral-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkImagingGeneral-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkImagingHybrid-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkImagingHybrid-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkImagingMath-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkImagingMath-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkImagingSources-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkImagingSources-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkInfovisCore-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkInfovisCore-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkInteractionStyle-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkInteractionStyle-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkInteractionWidgets-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkInteractionWidgets-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkPVAdaptorsCam-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkPVAdaptorsCam-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkPVAdaptorsPagosa-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkPVAdaptorsPagosa-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkPVAdaptorsPhasta-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkPVAdaptorsPhasta-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkPVCatalyst-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkPVCatalyst-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkPVClientWeb-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkPVClientWeb-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkPVInSitu-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkPVInSitu-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkPVPythonCatalyst-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkPVPythonCatalyst-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkPVVTKExtensionsAMR-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkPVVTKExtensionsAMR-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkPVVTKExtensionsCGNSReader-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkPVVTKExtensionsCGNSReader-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkPVVTKExtensionsCGNSWriter-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkPVVTKExtensionsCGNSWriter-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkPVVTKExtensionsConduit-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkPVVTKExtensionsConduit-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkPVVTKExtensionsCore-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkPVVTKExtensionsCore-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkPVVTKExtensionsExtraction-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkPVVTKExtensionsExtraction-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkPVVTKExtensionsExtractionPython-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkPVVTKExtensionsExtractionPython-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkPVVTKExtensionsFiltersGeneral-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkPVVTKExtensionsFiltersGeneral-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkPVVTKExtensionsFiltersMaterialInterface-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkPVVTKExtensionsFiltersMaterialInterface-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkPVVTKExtensionsFiltersPython-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkPVVTKExtensionsFiltersPython-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkPVVTKExtensionsFiltersRendering-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkPVVTKExtensionsFiltersRendering-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkPVVTKExtensionsFiltersStatistics-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkPVVTKExtensionsFiltersStatistics-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkPVVTKExtensionsIOAMR-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkPVVTKExtensionsIOAMR-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkPVVTKExtensionsIOCore-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkPVVTKExtensionsIOCore-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkPVVTKExtensionsIOEnSight-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkPVVTKExtensionsIOEnSight-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkPVVTKExtensionsIOExodus-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkPVVTKExtensionsIOExodus-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkPVVTKExtensionsIOGeneral-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkPVVTKExtensionsIOGeneral-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkPVVTKExtensionsIOImage-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkPVVTKExtensionsIOImage-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkPVVTKExtensionsIOSPCTH-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkPVVTKExtensionsIOSPCTH-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkPVVTKExtensionsInteractionStyle-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkPVVTKExtensionsInteractionStyle-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkPVVTKExtensionsMisc-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkPVVTKExtensionsMisc-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkPVVTKExtensionsPoints-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkPVVTKExtensionsPoints-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkParallelCore-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkParallelCore-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkParallelDIY-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkParallelDIY-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkPythonInterpreter-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkPythonInterpreter-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkRemotingAnimation-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkRemotingAnimation-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkRemotingApplication-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkRemotingApplication-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkRemotingClientServerStream-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkRemotingClientServerStream-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkRemotingCore-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkRemotingCore-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkRemotingExport-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkRemotingExport-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkRemotingLive-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkRemotingLive-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkRemotingMisc-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkRemotingMisc-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkRemotingServerManager-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkRemotingServerManager-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkRemotingServerManagerPython-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkRemotingServerManagerPython-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkRemotingSettings-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkRemotingSettings-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkRemotingViews-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkRemotingViews-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkRemotingViewsPython-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkRemotingViewsPython-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkRenderingAnnotation-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkRenderingAnnotation-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkRenderingContext2D-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkRenderingContext2D-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkRenderingContextOpenGL2-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkRenderingContextOpenGL2-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkRenderingCore-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkRenderingCore-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkRenderingFreeType-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkRenderingFreeType-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkRenderingGL2PSOpenGL2-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkRenderingGL2PSOpenGL2-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkRenderingLICOpenGL2-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkRenderingLICOpenGL2-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkRenderingLabel-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkRenderingLabel-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkRenderingMatplotlib-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkRenderingMatplotlib-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkRenderingOpenGL2-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkRenderingOpenGL2-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkRenderingParallel-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkRenderingParallel-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkRenderingSceneGraph-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkRenderingSceneGraph-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkRenderingUI-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkRenderingUI-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkRenderingVolume-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkRenderingVolume-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkRenderingVolumeAMR-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkRenderingVolumeAMR-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkRenderingVolumeOpenGL2-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkRenderingVolumeOpenGL2-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkRenderingVtkJS-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkRenderingVtkJS-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkTestingRendering-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkTestingRendering-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkUtilitiesPythonInitializer-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkUtilitiesPythonInitializer-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkViewsContext2D-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkViewsContext2D-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkViewsCore-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkViewsCore-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkWebCore-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkWebCore-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkWebGLExporter-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkWebGLExporter-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkWrappingPythonCore3.10-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkWrappingPythonCore3.10-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkWrappingTools-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkWrappingTools-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkexodusII-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkexodusII-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkgl2ps-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkgl2ps-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkh5part-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkh5part-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkioss-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkioss-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtklibharu-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtklibharu-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkloguru-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkloguru-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkmetaio-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkmetaio-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtksys-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtksys-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkverdict-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkverdict-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkvpic-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkvpic-pv5.9.so.5.9
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkxdmf2-pv5.9.so.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkxdmf2-pv5.9.so.5.9
 /usr/lib64/libQtTesting.so.1
 /usr/lib64/libQtTesting.so.5.9
 /usr/lib64/libavtdatabase_ser-pv5.9.so.1
@@ -5791,7 +6318,6 @@ popd
 /usr/lib64/paraview-5.9/plugins/SurfaceLIC/libvtkSurfaceLICRepresentations.so
 /usr/lib64/paraview-5.9/plugins/ThickenLayeredCells/ThickenLayeredCells.so
 /usr/lib64/paraview-5.9/plugins/ThickenLayeredCells/libvtkThickenLayeredCellsFilters.so
-/usr/share/clear/optimized-elf/lib*
 /usr/share/clear/optimized-elf/other*
 
 %files license
