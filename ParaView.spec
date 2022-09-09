@@ -4,7 +4,7 @@
 #
 Name     : ParaView
 Version  : 5.9.1
-Release  : 60
+Release  : 61
 URL      : https://github.com/Kitware/ParaView/archive/v5.9.1/ParaView-5.9.1.tar.gz
 Source0  : https://github.com/Kitware/ParaView/archive/v5.9.1/ParaView-5.9.1.tar.gz
 Source1  : https://gitlab.kitware.com/paraview/catalyst/-/archive/e36e4a5f3c67011c97c335cce23d2bc3abc0d086/catalyst-e36e4a5f3c67011c97c335cce23d2bc3abc0d086.tar.bz2
@@ -168,6 +168,15 @@ Requires: python3-core
 python3 components for the ParaView package.
 
 
+%package staticdev
+Summary: staticdev components for the ParaView package.
+Group: Default
+Requires: ParaView-dev = %{version}-%{release}
+
+%description staticdev
+staticdev components for the ParaView package.
+
+
 %prep
 %setup -q -n ParaView-5.9.1
 cd %{_builddir}
@@ -208,7 +217,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1656458875
+export SOURCE_DATE_EPOCH=1662682347
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -252,10 +261,10 @@ export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
-export CFLAGS="$CFLAGS -O3 -Wl,-z,x86-64-v3 -ffat-lto-objects -flto=auto -march=x86-64-v3 -msse2avx -mtune=skylake "
-export FCFLAGS="$FFLAGS -O3 -Wl,-z,x86-64-v3 -ffat-lto-objects -flto=auto -march=x86-64-v3 -msse2avx -mtune=skylake "
-export FFLAGS="$FFLAGS -O3 -Wl,-z,x86-64-v3 -ffat-lto-objects -flto=auto -march=x86-64-v3 -msse2avx -mtune=skylake "
-export CXXFLAGS="$CXXFLAGS -O3 -Wl,-z,x86-64-v3 -ffat-lto-objects -flto=auto -march=x86-64-v3 -msse2avx -mtune=skylake "
+export CFLAGS="$CFLAGS -O3 -Wl,-z,x86-64-v3 -ffat-lto-objects -flto=auto -march=x86-64-v3 -mtune=skylake "
+export FCFLAGS="$FFLAGS -O3 -Wl,-z,x86-64-v3 -ffat-lto-objects -flto=auto -march=x86-64-v3 -mtune=skylake "
+export FFLAGS="$FFLAGS -O3 -Wl,-z,x86-64-v3 -ffat-lto-objects -flto=auto -march=x86-64-v3 -mtune=skylake "
+export CXXFLAGS="$CXXFLAGS -O3 -Wl,-z,x86-64-v3 -ffat-lto-objects -flto=auto -march=x86-64-v3 -mtune=skylake "
 export CFLAGS="$CFLAGS -march=x86-64-v3 -m64 -Wl,-z,x86-64-v3"
 export CXXFLAGS="$CXXFLAGS -march=x86-64-v3 -m64 -Wl,-z,x86-64-v3"
 export FFLAGS="$FFLAGS -march=x86-64-v3 -m64 -Wl,-z,x86-64-v3"
@@ -286,26 +295,26 @@ make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1656458875
+export SOURCE_DATE_EPOCH=1662682347
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/ParaView
-cp %{_builddir}/ParaView-5.9.1/Clients/ParaView/Documentation/license.txt %{buildroot}/usr/share/package-licenses/ParaView/df128a6261c7007dde78a4281cde3799aee29c1e
-cp %{_builddir}/ParaView-5.9.1/Copyright.txt %{buildroot}/usr/share/package-licenses/ParaView/37a8b833dbdc6e1a55b31856ea576d32f6183a03
-cp %{_builddir}/ParaView-5.9.1/Examples/Catalyst/LICENSE.md %{buildroot}/usr/share/package-licenses/ParaView/dc0ac70f6798a1fab07e664869e34962e073b765
-cp %{_builddir}/ParaView-5.9.1/License_v1.2.txt %{buildroot}/usr/share/package-licenses/ParaView/a82a03505929838fba2ea73120e75142885075c2
-cp %{_builddir}/ParaView-5.9.1/Plugins/GeodesicMeasurement/Filters/FmmMesh/Copyright.txt %{buildroot}/usr/share/package-licenses/ParaView/71c1b3d176a6c31ed41fd2dd9868a22c04ec005b
-cp %{_builddir}/ParaView-5.9.1/Plugins/GmshReader/Copyright.txt %{buildroot}/usr/share/package-licenses/ParaView/b57a5b56ab3418ade320449ea14c66ee34562176
-cp %{_builddir}/ParaView-5.9.1/Plugins/GmshReader/License.txt %{buildroot}/usr/share/package-licenses/ParaView/9171b73c58271d57144d45127d0ac8f1b766c50d
-cp %{_builddir}/ParaView-5.9.1/Plugins/LookingGlass/LICENSE.txt %{buildroot}/usr/share/package-licenses/ParaView/0b414395c85ee7b6c062542b9916e86381ebfff1
-cp %{_builddir}/ParaView-5.9.1/Plugins/ParFlow/license.md %{buildroot}/usr/share/package-licenses/ParaView/21dd5a69af16e20faddb585ce969f70075f73ec1
-cp %{_builddir}/ParaView-5.9.1/ThirdParty/CosmoHaloFinder/vtkcosmohalofinder/LICENSE %{buildroot}/usr/share/package-licenses/ParaView/705cedcbfbf2689bd852a3864517c0476a5069e5
-cp %{_builddir}/ParaView-5.9.1/ThirdParty/NvPipe/vtknvpipe/LICENSE %{buildroot}/usr/share/package-licenses/ParaView/0209d812b850a8d6ccb4f26b97d963e03ffb2001
-cp %{_builddir}/ParaView-5.9.1/ThirdParty/cgns/vtkcgns/license.txt %{buildroot}/usr/share/package-licenses/ParaView/1be7ca6b47850de97d2dd5cab74d22620d017274
-cp %{_builddir}/ParaView-5.9.1/ThirdParty/cinema/paraview/tpl/LICENSE %{buildroot}/usr/share/package-licenses/ParaView/3d3834d24785e23ac63d088df2955c6bbffc3bad
-cp %{_builddir}/ParaView-5.9.1/ThirdParty/cinemasci/paraview/tpl/cinemasci/viewers/cinema/view/2.0/license.md %{buildroot}/usr/share/package-licenses/ParaView/9ca4c54dd3d448b91f1c0543e440460c548d9876
-cp %{_builddir}/ParaView-5.9.1/ThirdParty/cinemasci/paraview/tpl/cinemasci/viewers/license.md %{buildroot}/usr/share/package-licenses/ParaView/029c1692de8fd9733929172fa8c79a56ecbf97c2
-cp %{_builddir}/ParaView-5.9.1/ThirdParty/cinemasci/paraview/tpl/license.md %{buildroot}/usr/share/package-licenses/ParaView/9ca4c54dd3d448b91f1c0543e440460c548d9876
-cp %{_builddir}/ParaView-5.9.1/ThirdParty/protobuf/vtkprotobuf/LICENSE %{buildroot}/usr/share/package-licenses/ParaView/1b5a14d06dd784e88dadc5c68344be2dc13875b6
+cp %{_builddir}/ParaView-%{version}/Clients/ParaView/Documentation/license.txt %{buildroot}/usr/share/package-licenses/ParaView/df128a6261c7007dde78a4281cde3799aee29c1e
+cp %{_builddir}/ParaView-%{version}/Copyright.txt %{buildroot}/usr/share/package-licenses/ParaView/37a8b833dbdc6e1a55b31856ea576d32f6183a03
+cp %{_builddir}/ParaView-%{version}/Examples/Catalyst/LICENSE.md %{buildroot}/usr/share/package-licenses/ParaView/dc0ac70f6798a1fab07e664869e34962e073b765
+cp %{_builddir}/ParaView-%{version}/License_v1.2.txt %{buildroot}/usr/share/package-licenses/ParaView/a82a03505929838fba2ea73120e75142885075c2
+cp %{_builddir}/ParaView-%{version}/Plugins/GeodesicMeasurement/Filters/FmmMesh/Copyright.txt %{buildroot}/usr/share/package-licenses/ParaView/71c1b3d176a6c31ed41fd2dd9868a22c04ec005b
+cp %{_builddir}/ParaView-%{version}/Plugins/GmshReader/Copyright.txt %{buildroot}/usr/share/package-licenses/ParaView/b57a5b56ab3418ade320449ea14c66ee34562176
+cp %{_builddir}/ParaView-%{version}/Plugins/GmshReader/License.txt %{buildroot}/usr/share/package-licenses/ParaView/9171b73c58271d57144d45127d0ac8f1b766c50d
+cp %{_builddir}/ParaView-%{version}/Plugins/LookingGlass/LICENSE.txt %{buildroot}/usr/share/package-licenses/ParaView/0b414395c85ee7b6c062542b9916e86381ebfff1
+cp %{_builddir}/ParaView-%{version}/Plugins/ParFlow/license.md %{buildroot}/usr/share/package-licenses/ParaView/21dd5a69af16e20faddb585ce969f70075f73ec1
+cp %{_builddir}/ParaView-%{version}/ThirdParty/CosmoHaloFinder/vtkcosmohalofinder/LICENSE %{buildroot}/usr/share/package-licenses/ParaView/705cedcbfbf2689bd852a3864517c0476a5069e5
+cp %{_builddir}/ParaView-%{version}/ThirdParty/NvPipe/vtknvpipe/LICENSE %{buildroot}/usr/share/package-licenses/ParaView/0209d812b850a8d6ccb4f26b97d963e03ffb2001
+cp %{_builddir}/ParaView-%{version}/ThirdParty/cgns/vtkcgns/license.txt %{buildroot}/usr/share/package-licenses/ParaView/1be7ca6b47850de97d2dd5cab74d22620d017274
+cp %{_builddir}/ParaView-%{version}/ThirdParty/cinema/paraview/tpl/LICENSE %{buildroot}/usr/share/package-licenses/ParaView/3d3834d24785e23ac63d088df2955c6bbffc3bad
+cp %{_builddir}/ParaView-%{version}/ThirdParty/cinemasci/paraview/tpl/cinemasci/viewers/cinema/view/2.0/license.md %{buildroot}/usr/share/package-licenses/ParaView/9ca4c54dd3d448b91f1c0543e440460c548d9876
+cp %{_builddir}/ParaView-%{version}/ThirdParty/cinemasci/paraview/tpl/cinemasci/viewers/license.md %{buildroot}/usr/share/package-licenses/ParaView/029c1692de8fd9733929172fa8c79a56ecbf97c2
+cp %{_builddir}/ParaView-%{version}/ThirdParty/cinemasci/paraview/tpl/license.md %{buildroot}/usr/share/package-licenses/ParaView/9ca4c54dd3d448b91f1c0543e440460c548d9876
+cp %{_builddir}/ParaView-%{version}/ThirdParty/protobuf/vtkprotobuf/LICENSE %{buildroot}/usr/share/package-licenses/ParaView/1b5a14d06dd784e88dadc5c68344be2dc13875b6
 cp %{_builddir}/catalyst-e36e4a5f3c67011c97c335cce23d2bc3abc0d086/License.txt %{buildroot}/usr/share/package-licenses/ParaView/6320486e90dab6cfcfc7a039e81a5833463f9fc9
 cp %{_builddir}/catalyst-e36e4a5f3c67011c97c335cce23d2bc3abc0d086/thirdparty/conduit/COPYRIGHT %{buildroot}/usr/share/package-licenses/ParaView/30e86229bbc7ddafde801312981b6608aadc1c1e
 cp %{_builddir}/catalyst-e36e4a5f3c67011c97c335cce23d2bc3abc0d086/thirdparty/conduit/LICENSE %{buildroot}/usr/share/package-licenses/ParaView/82e4d03113c528488daa43e79674ba723be48bfe
@@ -6401,3 +6410,167 @@ popd
 %files python3
 %defattr(-,root,root,-)
 /usr/lib/python3*/*
+
+%files staticdev
+%defattr(-,root,root,-)
+/usr/lib64/glibc-hwcaps/x86-64-v3/libb64_catalyst2.0.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libblueprint_catalyst2.0.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libconduit_catalyst2.0.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/liblibyaml_catalyst2.0.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkAnalyzeNIfTIIOCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkArrowGlyphFilterCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkBagPlotViewsAndFiltersBagPlotCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkCDIReaderCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkChartsCoreCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkCommonColorCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkCommonComputationalGeometryCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkCommonCoreCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkCommonDataModelCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkCommonExecutionModelCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkCommonMathCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkCommonMiscCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkCommonSystemCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkCommonTransformsCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkDatamineReadersCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkDigitalRocksFiltersCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkDomainsChemistryCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkDomainsChemistryOpenGL2CS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkEmbossingRepresentationsCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkExplicitStructuredGridCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkFiltersAMRCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkFiltersCoreCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkFiltersExtractionCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkFiltersFlowPathsCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkFiltersGeneralCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkFiltersGenericCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkFiltersGeometryCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkFiltersHybridCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkFiltersHyperTreeCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkFiltersHyperTreeGridADRCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkFiltersModelingCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkFiltersParallelCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkFiltersParallelDIY2CS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkFiltersParallelStatisticsCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkFiltersParallelVerdictCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkFiltersPointsCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkFiltersProgrammableCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkFiltersPythonCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkFiltersSourcesCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkFiltersStatisticsCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkFiltersTextureCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkFiltersVerdictCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkGMVReaderCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkGeodesicMeasurementFiltersCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOAMRCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOAsynchronousCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOCONVERGECFDCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOCityGMLCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOCoreCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOEnSightCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOExodusCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOExportCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOExportGL2PSCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOGDALCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOGeometryCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOH5RageCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOH5partCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOImageCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOImportCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOInfovisCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOIossCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOLSDynaCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOLegacyCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOMovieCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIONetCDFCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOOggTheoraCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOPIOCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOPLYCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOParallelCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOParallelExodusCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOParallelLSDynaCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOParallelXMLCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOSegYCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOTRUCHASCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOTecplotTableCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOVPICCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOVeraOutCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOVisItBridgeCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOXMLCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOXMLParserCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkIOXdmf2CS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkImagingColorCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkImagingCoreCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkImagingFourierCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkImagingGeneralCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkImagingHybridCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkImagingMathCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkImagingSourcesCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkInfovisCoreCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkInteractionStyleCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkInteractionWidgetsCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkLagrangianParticleTrackerCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkMomentFiltersCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkMooseXfemClipCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkNonOrthogonalSourcesCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkPVVTKExtensionsAMRCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkPVVTKExtensionsCGNSReaderCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkPVVTKExtensionsCGNSWriterCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkPVVTKExtensionsConduitCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkPVVTKExtensionsCoreCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkPVVTKExtensionsExtractionCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkPVVTKExtensionsExtractionPythonCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkPVVTKExtensionsFiltersGeneralCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkPVVTKExtensionsFiltersMaterialInterfaceCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkPVVTKExtensionsFiltersPythonCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkPVVTKExtensionsFiltersRenderingCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkPVVTKExtensionsFiltersStatisticsCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkPVVTKExtensionsIOAMRCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkPVVTKExtensionsIOCoreCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkPVVTKExtensionsIOEnSightCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkPVVTKExtensionsIOExodusCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkPVVTKExtensionsIOGeneralCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkPVVTKExtensionsIOImageCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkPVVTKExtensionsIOSPCTHCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkPVVTKExtensionsInteractionStyleCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkPVVTKExtensionsMiscCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkPVVTKExtensionsPointsCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkPanoramicProjectionViewsCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkParallelCoreCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkRemotingAnimationCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkRemotingClientServerStreamCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkRemotingCoreCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkRemotingExportCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkRemotingLiveCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkRemotingMiscCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkRemotingServerManagerCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkRemotingServerManagerPythonCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkRemotingSettingsCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkRemotingViewsCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkRemotingViewsPythonCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkRenderingAnnotationCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkRenderingContext2DCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkRenderingContextOpenGL2CS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkRenderingCoreCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkRenderingFreeTypeCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkRenderingGL2PSOpenGL2CS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkRenderingLICOpenGL2CS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkRenderingLabelCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkRenderingMatplotlibCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkRenderingOpenGL2CS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkRenderingParallelCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkRenderingSceneGraphCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkRenderingUICS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkRenderingVolumeAMRCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkRenderingVolumeCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkRenderingVolumeOpenGL2CS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkRenderingVtkJSCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkSLACFiltersCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkStreamLinesCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkStreamingParticlesCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkSurfaceLICRepresentationsCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkTestingRenderingCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkThickenLayeredCellsFiltersCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkViewsContext2DCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkViewsCoreCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkWebCoreCS.a
+/usr/lib64/glibc-hwcaps/x86-64-v3/libvtkWebGLExporterCS.a
